@@ -1,0 +1,1068 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>MiniFS API Reference</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>MiniFS</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><strong>minifs</strong></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>minifs</code></h1>
+<p>MiniFS is a minimal file system module for Lua.</p>
+<p>
+ It depends on LFS and provides easy access to functions such as copying files, checking the type of a file or working with temporary files.</p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#fs.write">fs.write (file, data)</a></td>
+	<td class="summary">Write data to a file, overwriting the previous contents (and creating the file if needed).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.append">fs.append (file, data)</a></td>
+	<td class="summary">Append data to a file (similiar to write, but will not overwrite the data inside the file).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.read">fs.read (file)</a></td>
+	<td class="summary">Read all data from a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.copy">fs.copy (fromfile, tofile)</a></td>
+	<td class="summary">Copy a file to a destination.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.move">fs.move (fromfile, tofile)</a></td>
+	<td class="summary">Move a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.appendcopy">fs.appendcopy (fromfile, tofile)</a></td>
+	<td class="summary">Append a copy of a file to another file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.appendmove">fs.appendmove (fromfile, tofile)</a></td>
+	<td class="summary">Move and append a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.remove">fs.remove (file)</a></td>
+	<td class="summary">Remove a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.size">fs.size (file)</a></td>
+	<td class="summary">Get the size of a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.update">fs.update (file, accesstime, modificationtime)</a></td>
+	<td class="summary">Update the access/modification time of a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.create">fs.create (file)</a></td>
+	<td class="summary">Create an empty, zero byte file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.rename">fs.rename (file, newname)</a></td>
+	<td class="summary">Rename a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.exists">fs.exists (file)</a></td>
+	<td class="summary">Check if a file exists.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.mkdir">fs.mkdir (dir)</a></td>
+	<td class="summary">Create a new directory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.rmdir">fs.rmdir (dir, recursive)</a></td>
+	<td class="summary">Remove a directory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.device">fs.device (file)</a></td>
+	<td class="summary">Get the device of the file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.type">fs.type (file)</a></td>
+	<td class="summary">Get the type of the file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.uid">fs.uid (file)</a></td>
+	<td class="summary">Get the user ID of the file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.gid">fs.gid (file)</a></td>
+	<td class="summary">Get the group ID of the file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.accesstime">fs.accesstime (file)</a></td>
+	<td class="summary">Get the last access time of the file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.modificationtime">fs.modificationtime (file)</a></td>
+	<td class="summary">Get the last modification time of the file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.changetime">fs.changetime (file)</a></td>
+	<td class="summary">Get the last status change time of the file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.separator">fs.separator ()</a></td>
+	<td class="summary">Get the directory separator that the system uses.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.system">fs.system (unixtype)</a></td>
+	<td class="summary">Get the operating system the script is running on (Mac/Linux/Windows).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.randomstring">fs.randomstring (length)</a></td>
+	<td class="summary">Create a random string containing lowercase, uppercase letters and numbers.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.tmpname">fs.tmpname (length, prefix, suffix)</a></td>
+	<td class="summary">Create a valid path to a temporary file name in the default temporary directory of the operating system.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.usetmp">fs.usetmp (length, prefix, suffix, call, dir)</a></td>
+	<td class="summary">Create a temporary file, then call a defined function and remove the file afterwards.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.usetmpdir">fs.usetmpdir (length, prefix, suffix, call)</a></td>
+	<td class="summary">Create a temporary directory, then call a defined function and recursively remove the directory afterwards.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.files">fs.files (dir, fullpath)</a></td>
+	<td class="summary">Basic iterator over files in a directory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.link">fs.link (file, link)</a></td>
+	<td class="summary">Create a hardlink to a file.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.symlink">fs.symlink (file, link)</a></td>
+	<td class="summary">Create a symlink to a file or directory.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.run">fs.run (command, ...)</a></td>
+	<td class="summary">Run a console comand.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#fs.call">fs.call (command, ...)</a></td>
+	<td class="summary">Call a command and return all of its results.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "fs.write"></a>
+    <strong>fs.write (file, data)</strong>
+    </dt>
+    <dd>
+    Write data to a file, overwriting the previous contents (and creating the file if needed).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to write to.
+        </li>
+        <li><span class="parameter">data</span>
+         The data that will be written to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.append"></a>
+    <strong>fs.append (file, data)</strong>
+    </dt>
+    <dd>
+    Append data to a file (similiar to write, but will not overwrite the data inside the file).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to append to.
+        </li>
+        <li><span class="parameter">data</span>
+         The data that will be appended to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.read"></a>
+    <strong>fs.read (file)</strong>
+    </dt>
+    <dd>
+    Read all data from a file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to be read.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.copy"></a>
+    <strong>fs.copy (fromfile, tofile)</strong>
+    </dt>
+    <dd>
+    Copy a file to a destination.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fromfile</span>
+         The file to be copied.
+        </li>
+        <li><span class="parameter">tofile</span>
+         The target path.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.move"></a>
+    <strong>fs.move (fromfile, tofile)</strong>
+    </dt>
+    <dd>
+    Move a file.  Similiar to copying, but will remove the original file after copying.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fromfile</span>
+         The file to be moved.
+        </li>
+        <li><span class="parameter">tofile</span>
+         The destination of the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.appendcopy"></a>
+    <strong>fs.appendcopy (fromfile, tofile)</strong>
+    </dt>
+    <dd>
+    Append a copy of a file to another file.  Like copying, but if the target file already exists the contents will not be overwritten but instead added after the existing data.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fromfile</span>
+         The file to be copied.
+        </li>
+        <li><span class="parameter">tofile</span>
+         The target file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.appendmove"></a>
+    <strong>fs.appendmove (fromfile, tofile)</strong>
+    </dt>
+    <dd>
+    Move and append a file.  As opposed to the normal move function, the contents of the moved file will be appended to the target file instead of overwriting it.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fromfile</span>
+         The file to be moved.
+        </li>
+        <li><span class="parameter">tofile</span>
+         The destination of the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        nil
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.remove"></a>
+    <strong>fs.remove (file)</strong>
+    </dt>
+    <dd>
+    Remove a file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to be removed.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.size"></a>
+    <strong>fs.size (file)</strong>
+    </dt>
+    <dd>
+    Get the size of a file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to get the size of.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.update"></a>
+    <strong>fs.update (file, accesstime, modificationtime)</strong>
+    </dt>
+    <dd>
+    Update the access/modification time of a file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to be updated.
+        </li>
+        <li><span class="parameter">accesstime</span>
+         The access time to set, if nil will be set to the current time.
+        </li>
+        <li><span class="parameter">modificationtime</span>
+         The modification time to set, if nil will be set to the accesstime, and if accesstime is nil, will be set to the current time.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean, string [error message]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.create"></a>
+    <strong>fs.create (file)</strong>
+    </dt>
+    <dd>
+    Create an empty, zero byte file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to be created.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.rename"></a>
+    <strong>fs.rename (file, newname)</strong>
+    </dt>
+    <dd>
+    Rename a file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The name of the file.
+        </li>
+        <li><span class="parameter">newname</span>
+         The new name of the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.exists"></a>
+    <strong>fs.exists (file)</strong>
+    </dt>
+    <dd>
+    Check if a file exists.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The path to be checked.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean [whether the file exists]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.mkdir"></a>
+    <strong>fs.mkdir (dir)</strong>
+    </dt>
+    <dd>
+    Create a new directory.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dir</span>
+         The path to the directory.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean, string [error message]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.rmdir"></a>
+    <strong>fs.rmdir (dir, recursive)</strong>
+    </dt>
+    <dd>
+    Remove a directory.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dir</span>
+         The path to the directory.
+        </li>
+        <li><span class="parameter">recursive</span>
+         If true, the directory will be recursively removed. If false, the function will error on non-empty directories.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        boolean, string [error message]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.device"></a>
+    <strong>fs.device (file)</strong>
+    </dt>
+    <dd>
+    Get the device of the file.  On Linux, this will be the inode. On Windows, this will be the drive number.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The path to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number (string on Windows?)
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.type"></a>
+    <strong>fs.type (file)</strong>
+    </dt>
+    <dd>
+    Get the type of the file.  This can be 'file', 'directory', 'link', 'socket', 'named pipe', 'char device', 'block device' or 'other'.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The path to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.uid"></a>
+    <strong>fs.uid (file)</strong>
+    </dt>
+    <dd>
+    Get the user ID of the file.  Always 0 on Windows.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The path to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.gid"></a>
+    <strong>fs.gid (file)</strong>
+    </dt>
+    <dd>
+    Get the group ID of the file.  Always 0 on Windows.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The path to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.accesstime"></a>
+    <strong>fs.accesstime (file)</strong>
+    </dt>
+    <dd>
+    Get the last access time of the file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The path to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.modificationtime"></a>
+    <strong>fs.modificationtime (file)</strong>
+    </dt>
+    <dd>
+    Get the last modification time of the file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The path to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.changetime"></a>
+    <strong>fs.changetime (file)</strong>
+    </dt>
+    <dd>
+    Get the last status change time of the file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The path to the file.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.separator"></a>
+    <strong>fs.separator ()</strong>
+    </dt>
+    <dd>
+    Get the directory separator that the system uses.  Forward slash on Unix-likes, Backward slash on Windows.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.system"></a>
+    <strong>fs.system (unixtype)</strong>
+    </dt>
+    <dd>
+    Get the operating system the script is running on (Mac/Linux/Windows).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">unixtype</span>
+         If set to true, the type of the Unix-like will be detected. Note that this uses an io.popen call and might be more expensive.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.randomstring"></a>
+    <strong>fs.randomstring (length)</strong>
+    </dt>
+    <dd>
+    Create a random string containing lowercase, uppercase letters and numbers.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">length</span>
+         Length of the name, 6 by default.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.tmpname"></a>
+    <strong>fs.tmpname (length, prefix, suffix)</strong>
+    </dt>
+    <dd>
+    Create a valid path to a temporary file name in the default temporary directory of the operating system.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">length</span>
+         Length of the filename.
+        </li>
+        <li><span class="parameter">prefix</span>
+         Prefix of the filename, does not count for length.
+        </li>
+        <li><span class="parameter">suffix</span>
+         Suffix of the filename, does not count for length.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        string
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.usetmp"></a>
+    <strong>fs.usetmp (length, prefix, suffix, call, dir)</strong>
+    </dt>
+    <dd>
+    Create a temporary file, then call a defined function and remove the file afterwards.
+ Note that you can also provide only one argument, the callback, and keep the rest of the values as defaults.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">length</span>
+         Length of the filename.
+        </li>
+        <li><span class="parameter">prefix</span>
+         Prefix of the filename
+        </li>
+        <li><span class="parameter">suffix</span>
+         Suffix of the filename.
+        </li>
+        <li><span class="parameter">call</span>
+         The callback function to call inbetween creating a temporary file and removing the file. One argument, the path to the file, is provided to the function.
+        </li>
+        <li><span class="parameter">dir</span>
+         If this is true, then the temporary file will be a temporary directory. See {fs.usetmpdir}.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.usetmpdir"></a>
+    <strong>fs.usetmpdir (length, prefix, suffix, call)</strong>
+    </dt>
+    <dd>
+    Create a temporary directory, then call a defined function and recursively remove the directory afterwards.
+ Note that you can also provide only one argument, the callback, and keep the rest of the values as defaults.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">length</span>
+         Length of the filename.
+        </li>
+        <li><span class="parameter">prefix</span>
+         Prefix of the filename
+        </li>
+        <li><span class="parameter">suffix</span>
+         Suffix of the filename.
+        </li>
+        <li><span class="parameter">call</span>
+         The callback function to call inbetween creating a temporary file and removing the file. One argument, the path to the file, is provided to the function.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.files"></a>
+    <strong>fs.files (dir, fullpath)</strong>
+    </dt>
+    <dd>
+    Basic iterator over files in a directory.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dir</span>
+         The directory to iterate through.
+        </li>
+        <li><span class="parameter">fullpath</span>
+         If this is set to true, then the entries returned by the iterator will contain the directory name along with the file name.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        function [iterator returns: string]
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.link"></a>
+    <strong>fs.link (file, link)</strong>
+    </dt>
+    <dd>
+    Create a hardlink to a file.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to be linked to.
+        </li>
+        <li><span class="parameter">link</span>
+         The path to the link.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.symlink"></a>
+    <strong>fs.symlink (file, link)</strong>
+    </dt>
+    <dd>
+    Create a symlink to a file or directory.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">file</span>
+         The file to be linked to.
+        </li>
+        <li><span class="parameter">link</span>
+         The path to the link.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.run"></a>
+    <strong>fs.run (command, ...)</strong>
+    </dt>
+    <dd>
+    Run a console comand.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">command</span>
+         The command to be ran.
+        </li>
+        <li><span class="parameter">...</span>
+         Additional arguments.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "fs.call"></a>
+    <strong>fs.call (command, ...)</strong>
+    </dt>
+    <dd>
+    Call a command and return all of its results.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">command</span>
+         The command to be called.
+        </li>
+        <li><span class="parameter">...</span>
+         Additional arguments.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-05-21 01:05:55 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
