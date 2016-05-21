@@ -1,5 +1,6 @@
 local fs = { }
-require("luafilesystem")
+local lfs = pcall(require, "luafilesystem")
+lfs = lfs or require("lfs")
 math.randomseed(os.time())
 local bool
 bool = function(value)

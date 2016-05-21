@@ -2,7 +2,8 @@
 -- It depends on LFS and provides easy access to functions such as copying files, checking the type of a file or working with temporary files.
 -- You can get it from the GitLab repository: https://gitlab.com/zatherz/minifs.
 fs = {}
-require "luafilesystem"
+lfs = pcall(require, "luafilesystem")
+lfs = lfs or require("lfs")
 math.randomseed(os.time())
 
 bool = (value) -> not not value
