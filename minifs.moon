@@ -1,5 +1,6 @@
 --- MiniFS is a minimal file system module for Lua, licensed under MIT.
 -- It depends on LFS and provides easy access to functions such as copying files, checking the type of a file or working with temporary files.
+-- You can get it from the GitLab repository: https://gitlab.com/zatherz/minifs.
 fs = {}
 require "luafilesystem"
 math.randomseed(os.time())
