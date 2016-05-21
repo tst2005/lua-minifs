@@ -1,5 +1,5 @@
 local fs = { }
-require("lfs")
+require("luafilesystem")
 math.randomseed(os.time())
 local bool
 bool = function(value)
@@ -49,8 +49,7 @@ fs.copy = function(fromfile, tofile)
   return (bool(ret))
 end
 fs.move = function(fromfile, tofile)
-  assert(fs.copy(fromfile, tofile))
-  return fs.remove(fromfile)
+  return os.rename(fromfile, tofile)
 end
 fs.appendcopy = function(fromfile, tofile)
   local fromfilehandle = assert(io.open(fromfile, "rb"))
@@ -80,6 +79,11 @@ fs.create = function(file)
   return (fs.write(file, ""))
 end
 fs.rename = function(file, newname)
+  if {
+    newname = match(fs.separator())
+  } then
+    return nil, "Invalid new name: name can't contain a directory separator'"
+  end
   return (os.rename(file, newname))
 end
 fs.exists = function(file)

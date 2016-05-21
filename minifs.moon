@@ -1,7 +1,7 @@
 --- MiniFS is a minimal file system module for Lua, licensed under MIT.
 -- It depends on LFS and provides easy access to functions such as copying files, checking the type of a file or working with temporary files.
 fs = {}
-require "lfs"
+require "luafilesystem"
 math.randomseed(os.time())
 
 bool = (value) -> not not value
@@ -66,9 +66,7 @@ fs.copy = (fromfile, tofile) ->
 -- @param fromfile The file to be moved.
 -- @param tofile The destination of the file.
 -- @return nil
-fs.move = (fromfile, tofile) ->
-  assert(fs.copy(fromfile, tofile)) -- we don't want accidents where it'll fail
-  fs.remove(fromfile)
+fs.move = (fromfile, tofile) -> os.rename(fromfile, tofile)
 
 --- Append a copy of a file to another file. Like copying, but if the target file already exists the contents will not be overwritten but instead added after the existing data.
 -- @param fromfile The file to be copied.
@@ -119,11 +117,13 @@ fs.update = (file, accesstime, modificationtime) ->
 fs.create = (file) ->
   return(fs.write(file, ""))
   
---- Rename a file.
+--- Rename a file. The function will error
 -- @param file The name of the file.
 -- @param newname The new name of the file.
 -- @return boolean
 fs.rename = (file, newname) ->
+  if newname:match(fs.separator())
+    return nil, "Invalid new name: name can't contain a directory separator'"
   return(os.rename(file, newname))
 
 --- Check if a file exists.
