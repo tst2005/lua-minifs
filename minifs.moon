@@ -104,6 +104,11 @@ fs.size = (file) ->
   size = assert(filehandle\seek("end"))
   filehandle\close()
   return (size)
+
+--- Get the permission string of a file
+-- @param file The file to get the permission string of.
+-- @return string
+fs.permissions = (file) -> return lfs.attributes(file).permissions
   
 --- Update the access/modification time of a file.
 -- @param file The file to be updated.

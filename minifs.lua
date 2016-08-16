@@ -73,6 +73,9 @@ fs.size = function(file)
   filehandle:close()
   return (size)
 end
+fs.permissions = function(file)
+  return lfs.attributes(file).permissions
+end
 fs.update = function(file, accesstime, modificationtime)
   return (lfs.touch(file, accesstime, modificationtime))
 end
